@@ -1,0 +1,25 @@
+{
+    "name": "Kairos Oasis",
+    "version": "1.0.0",
+    "description": "Reads and reports the total hours worked for the week (because apparently Kairos thinks it's too hard to do that)",
+    "manifest_version": 3,
+    "author": "Heitor Carvalho",
+    "action":{
+        "default_popup": "index.html",
+        "default_title": "Kairos Oasis"
+    },
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": ["https://*.dimepkairos.com.br/Dimep/PedidosJustificativas/*"],
+            "exclude_matches": [],
+            "js": ["kairos_scraper.js"]
+        }
+    ],
+    "permissions": [
+        "storage",
+        "tabs"
+    ]
+}
