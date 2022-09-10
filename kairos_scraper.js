@@ -92,6 +92,6 @@ window.onload = function scrape(params)
 
         chrome.runtime.sendMessage({ data: scrapedData })
 
-    }, 2000);
+    }, 1500);
     
 }
