@@ -10,6 +10,21 @@
     <h1>Loading...</h1>
 </div>
 <div id="today-hours-worked-info" class="d-none wrapper">
+    <div id="today__box">
+        <h1>Hoje</h1>
+        <div class="wrapper__hours">
+
+            <div class="wrapper__worked wrapper-hour-box">
+                <div id="today__worked"></div>
+            </div>
+
+            <div class="wrapper__remaining wrapper-hour-box">
+                <span class="remaining__title">Falta:</span>
+                <div id="today__remaining"></div>
+            </div>
+        </div>
+
+    </div>
     <div class="container mt-3" id="content">
         <h2 class="text-center">Horas Trabalhadas</h2>
         <table class="table table-bordered" id="oasis__table">
@@ -23,6 +38,9 @@
 
         </table>
     </div>
+
+
+</div>
 </div>
 </body>
 
@@ -31,10 +49,69 @@
 
 
 <style>
-    .wrapper{
-        padding:20px;
-        width:500px;
-        height:500px;
+
+
+    #today__box, .hour__box {
+        width: 100%;
+    }
+
+    #today-hours-worked-info {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 30px;
+        flex-direction: column;
+    }
+
+    .remaining__title {
+        flex: 1;
+        font-size: 1.2rem;
+        font-weight: normal;
+    }
+
+    .wrapper__hours {
+        display: flex;
+        gap: 15px;
+    }
+
+    .wrapper__remaining {
+        display: flex;
+        flex: 1;
+        background: #f2f2f6A3;
+
+
+        font-size: 1.5rem;
+    }
+
+
+    #today__remaining {
+        flex: 2;
+    }
+
+    .wrapper__worked {
+        padding: 5px;
+
+        font-size: 2.5rem;
+        background: #f2f2f6;
+        flex: 2;
+
+    }
+
+
+    .wrapper-hour-box {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        padding: 12px;
+        font-weight: bold;
+    }
+
+    .wrapper {
+        padding: 20px;
+        width: 500px;
+        height: 500px;
     }
 </style>
 </html>

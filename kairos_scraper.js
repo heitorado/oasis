@@ -1,6 +1,5 @@
 const scrape = (params) => {
     const columnDays = document.getElementsByClassName(DAY_COLUMN_CLASSNAME);
-
     const scrapedData = Array.from(columnDays).map((dayColumn) => {
         const inOutTimes = Array.from(dayColumn.children)
             .filter((hourFilled) => {
@@ -34,12 +33,15 @@ const scrape = (params) => {
             .reduce((hourSum, hour) => hour + hourSum, 0);
 
 
+        const {weekDay, dateText} = getDate(dayColumn)
         const hoursWorked = formatHour(hoursWorkedSum);
         const hoursRemaining = ["Sábado", "Domingo"].includes(weekDay)
             ? 0
             : formatRemainingHour(hoursWorkedSum, LAB_BASE_WORK_HOUR_IN_MINUTE);
 
-        const {weekDay, dateText} = getDate(dayColumn)
+
+        const isToday = moment().format("DD/MM") === dateText
+
 
         return {
             hoursWorked,
@@ -47,7 +49,8 @@ const scrape = (params) => {
             date: {
                 weekDay,
                 date: dateText,
-            },
+                isToday
+            }
         };
     });
 
@@ -61,12 +64,14 @@ const getDate = (dayColumn) => {
         return arrayList.includes(FORMATTED_DATE_CLASSNAME);
     })[0]?.value;
 
+    const dateMoment = moment(columnDate, "DD/MM/YYYY")
+
     const weekDay =
         translateWeekDaysMap[
-            moment().day(moment(columnDate, "DD/MM/YYYY").day()).format("dddd")
+            moment().day(dateMoment.day()).format("dddd")
             ];
 
-    return {weekDay, dateText: columnDate}
+    return {weekDay, dateText: dateMoment.format("DD/MM")}
 }
 const formatHour = (time) => {
     const hour = Math.floor(time / ONE_HOUR_IN_MINUTE);
