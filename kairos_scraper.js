@@ -17,17 +17,16 @@ const scrape = (params) => {
         const hoursWorkedSum = inTimeList
             .map((inTime, index) => {
                 const outTime = outTimeList[index];
-                const start = moment(inTime, "HH:mm");
-                const end = moment(outTime, "HH:mm");
-                const now = moment(moment().format("HH:mm"), "HH:mm");
+                const start = moment(inTime, TIME_FORMAT);
+                const end = moment(outTime, TIME_FORMAT);
+                const now = moment(moment().format(TIME_FORMAT), TIME_FORMAT);
 
                 if (outTime)
                     return (
                         getDuration(end).asMinutes() - getDuration(start).asMinutes()
                     );
                 return (
-                    A_DAY_IN_MINUTE -
-                    (getDuration(start).asMinutes() - getDuration(now).asMinutes())
+                    getDuration(now).asMinutes() - getDuration(start).asMinutes()
                 );
             })
             .reduce((hourSum, hour) => hour + hourSum, 0);
@@ -104,12 +103,20 @@ const LAB_BASE_WORK_HOUR_IN_MINUTE = 420;
 const A_DAY_IN_MINUTE = 1440;
 const ONE_HOUR_IN_MINUTE = 60;
 
+const TIME_FORMAT = "HH:mm"
+const DATE_FORMAT = "DD/MM"
+
 const DAY_COLUMN_CLASSNAME = "DiaApontamento";
 const HOUR_CELL_CLASSNAME = "FilledSlot";
 const FORMATTED_DATE_CLASSNAME = "diaFormatado";
 
 
 window.addEventListener("mouseover", () => {
+    scrape()
+})
+
+
+window.addEventListener("click", () => {
     scrape()
 })
 
