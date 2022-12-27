@@ -23,7 +23,7 @@ function updateTable(tableData) {
         const dateRowElement = document.createElement("td")
         const workedRowElement = document.createElement("td")
 
-        dateRowElement.append(date.weekDay + " - " + date.date)
+        dateRowElement.append(`${date.date} - ${date.weekDay}`)
         workedRowElement.append(hoursWorked)
         remainingRowElement.append(hoursRemaining)
 
